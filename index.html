@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>A Question For You ❤️</title>
+<title>Hello Bonolo ❤️</title>
 
 <style>
 body{
@@ -49,10 +49,11 @@ button{
 /* Floating hearts */
 
 .heart{
-  position:fixed;
+  position:absolute;
   font-size:24px;
   animation: floatUp 2s ease-out forwards;
-  z-index:1;
+  z-index:9999;
+  pointer-events:none; /* so hearts don't block clicks */
 }
 
 @keyframes floatUp{
@@ -83,7 +84,6 @@ button{
 let step = 0;
 
 /* NO button runs away */
-
 function attachNoButton(){
   const noBtn = document.getElementById("no");
 
@@ -99,17 +99,15 @@ function attachNoButton(){
 attachNoButton();
 
 /* Floating hearts */
-
 function createHearts(){
-
   for(let i=0;i<8;i++){
-
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤️";
 
-    heart.style.left = Math.random()*window.innerWidth + "px";
-    heart.style.top = (window.innerHeight-100) + "px";
+    // Random position slightly above bottom so hearts are visible
+    heart.style.left = Math.random()*(window.innerWidth-50) + "px";
+    heart.style.top = (window.innerHeight-150) + "px";
 
     heart.style.fontSize = (20 + Math.random()*20) + "px";
 
@@ -119,13 +117,10 @@ function createHearts(){
       heart.remove();
     },2000);
   }
-
 }
 
 /* Steps */
-
 function next(){
-
   createHearts();
 
   const card = document.getElementById("card");
