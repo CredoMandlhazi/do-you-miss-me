@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -13,6 +13,7 @@ body{
   align-items:center;
   justify-content:center;
   text-align:center;
+  overflow:hidden;
 }
 
 .card{
@@ -21,6 +22,8 @@ body{
   border-radius:15px;
   box-shadow:0 10px 25px rgba(0,0,0,0.2);
   max-width:400px;
+  position:relative;
+  z-index:2;
 }
 
 button{
@@ -42,6 +45,26 @@ button{
   color:white;
   position:relative;
 }
+
+/* Floating hearts */
+
+.heart{
+  position:fixed;
+  font-size:24px;
+  animation: floatUp 2s ease-out forwards;
+  z-index:1;
+}
+
+@keyframes floatUp{
+  0%{
+    transform: translateY(0) scale(1);
+    opacity:1;
+  }
+  100%{
+    transform: translateY(-200px) scale(1.8);
+    opacity:0;
+  }
+}
 </style>
 </head>
 
@@ -56,7 +79,10 @@ button{
 </div>
 
 <script>
+
 let step = 0;
+
+/* NO button runs away */
 
 function attachNoButton(){
   const noBtn = document.getElementById("no");
@@ -65,50 +91,5 @@ function attachNoButton(){
     noBtn.addEventListener("mouseover",()=>{
       const x = Math.random()*300-150;
       const y = Math.random()*200-100;
-      noBtn.style.transform=`translate(${x}px,${y}px)`;
-    });
-  }
-}
-
-attachNoButton();
-
-function next(){
-  const card = document.getElementById("card");
-  step++;
-
-  if(step === 1){
-    card.innerHTML = `
-      <h2>I knew it 😏</h2>
-      <p>I've noticed you've been stalking me on TikTok again...</p>
-
-      <button id="yes" onclick="next()">YES</button>
-      <button id="no">NO</button>
-    `;
-  }
-
-  else if(step === 2){
-    card.innerHTML = `
-      <h2>Hmmmm 🤔</h2>
-      <p>Then maybe you should text me.</p>
-      <p>Will you text me?</p>
-
-      <button id="yes" onclick="next()">YES</button>
-      <button id="no">NO</button>
-    `;
-  }
-
-  else if(step === 3){
-    card.innerHTML = `
-      <h2>Good choice 😌</h2>
-      <p>I'll be waiting for your message...</p>
-      <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" width="250">
-    `;
-  }
-
-  attachNoButton();
-}
-</script>
-
-</body>
-</html>
+      noBtn.style.transfor
 ```
